@@ -1,0 +1,72 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+// Отметка сборки. Хеш коммита — самый точный признак того, какой именно код
+// стоит на телефоне; если гита рядом нет, остаётся время сборки по UTC.
+// Без этого «проверьте на свежей сборке» проверить нечем.
+def gitSha = {
+    try {
+        def p = ['git', 'rev-parse', '--short', 'HEAD'].execute(null, rootProject.projectDir)
+        p.waitFor()
+        return p.exitValue() == 0 ? p.text.trim() : ''
+    } catch (Exception ignored) {
+        return ''
+    }
+}()
+def buildStamp = new Date().format('yyMMdd-HHmm', TimeZone.getTimeZone('UTC'))
+
+android {
+    namespace 'org.extremum.enforcer'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "org.extremum.enforcer"
+        // 21 — это Android 5.0. Ниже BLE-сканер (BluetoothLeScanner) просто
+        // не существует, поэтому смысла опускать планку дальше нет.
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
+        buildConfigField "String", "BUILD_STAMP", "\"${buildStamp}\""
+    }
+
+    buildTypes {
+        release {
+            // Без обфускации: приложение маленькое, а R8 при minSdk 21
+            // добавляет лишний повод для расхождений между сборками.
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Подписываем отладочным ключом. Play для этого APK не нужен,
+            // а ставить на телефон можно только подписанный. Зато сборка
+            // не помечена debuggable и не тащит отладочную обвязку.
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    // Java 8 — потолок, который держат все версии от 21-й без десугаринга.
+    // Поэтому в коде нет java.time: даты через SimpleDateFormat.
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    lint {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.core:core-ktx:1.12.0'
+}

@@ -1,0 +1,15 @@
+*.iml
+.gradle/
+local.properties
+.idea/
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+photo_*.jpg
+*.zip
+*.apk
+
+# отчёты диагностики — рабочие файлы
+диагностика*.txt

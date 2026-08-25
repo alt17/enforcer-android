@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Enforcer</string>
+    <string name="big_title">Табло</string>
+
+    <string name="btn_find">Найти</string>
+    <string name="btn_disconnect">Отключить</string>
+    <string name="btn_start">Старт</string>
+    <string name="btn_pause">Пауза</string>
+    <string name="btn_resume">Продолжить</string>
+    <string name="btn_stop">Стоп</string>
+    <string name="btn_zero">Ноль</string>
+    <string name="btn_peak_reset">Сброс пика</string>
+    <string name="btn_save">Сохранить</string>
+    <string name="btn_big">Табло</string>
+    <string name="btn_back">Назад</string>
+
+    <string name="peak_caption">Пик:</string>
+    <string name="dash">—</string>
+
+    <string name="menu_units">Единицы</string>
+    <string name="menu_window">Окно графика</string>
+    <string name="menu_devices">Приборы…</string>
+    <string name="menu_name">Имя файла записи…</string>
+    <string name="menu_alarm">Порог сигнала…</string>
+    <string name="menu_log">Журнал</string>
+    <string name="menu_share">Поделиться последним CSV</string>
+    <string name="menu_diag">Отчёт для разбора…</string>
+    <string name="menu_files">Где лежат записи</string>
+    <string name="menu_repo">Репозиторий на GitHub</string>
+
+    <string name="repo_url">https://github.com/alt17/enforcer-android</string>
+</resources>

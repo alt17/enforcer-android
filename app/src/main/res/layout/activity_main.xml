@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/muted"
+        android:textSize="12sp"
+        android:text="прибор не подключён" />
+
+    <!-- Однопиборный вид: большое число, единицы, строка пика. Ровно то,
+         что было до многоприборности, и с одним прибором так и остаётся. -->
+    <LinearLayout
+        android:id="@+id/single"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <!-- Какой именно прибор на связи. Пока имя было только на табло,
+             перепутать два прибора было нечем. -->
+        <TextView
+            android:id="@+id/device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:textColor="@color/device"
+            android:textSize="14sp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="@color/device"
+            android:textSize="46sp"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            android:text="@string/dash" />
+
+        <!-- Ширина колонки единиц задана жёстко и одинаково с колонкой единиц
+             в строке пика: только так правые края обоих чисел встают в одну
+             линию, не завися от длины «kN» и «кгс». -->
+        <TextView
+            android:id="@+id/unit"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="6dp"
+            android:paddingEnd="0dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/device"
+            android:textSize="18sp"
+            android:text="kN" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/extra"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/muted"
+            android:textSize="12sp"
+            android:text="" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="6dp"
+            android:textColor="@color/muted"
+            android:textSize="13sp"
+            android:text="@string/peak_caption" />
+
+        <TextView
+            android:id="@+id/peak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textColor="@color/peak"
+            android:textSize="22sp"
+            android:typeface="monospace"
+            android:text="@string/dash" />
+
+        <TextView
+            android:id="@+id/peakUnit"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="6dp"
+            android:textColor="@color/peak"
+            android:textSize="13sp"
+            android:text="kN" />
+    </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Список приборов. Показывается только когда их больше одного:
+         строки достраиваются кодом, см. syncRows(). -->
+    <LinearLayout
+        android:id="@+id/devices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" />
+
+    <org.extremum.enforcer.PlotView
+        android:id="@+id/plot"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:minHeight="140dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button android:id="@+id/find" style="@style/Btn" android:text="@string/btn_find" />
+        <Button android:id="@+id/zero" style="@style/Btn" android:text="@string/btn_zero" />
+        <Button android:id="@+id/peakReset" style="@style/Btn" android:text="@string/btn_peak_reset" />
+        <Button android:id="@+id/big" style="@style/Btn" android:text="@string/btn_big" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button android:id="@+id/start" style="@style/Btn" android:text="@string/btn_start" />
+        <Button android:id="@+id/pause" style="@style/Btn" android:text="@string/btn_pause" />
+        <Button android:id="@+id/stop" style="@style/Btn" android:text="@string/btn_stop" />
+        <Button android:id="@+id/save" style="@style/Btn" android:text="@string/btn_save" />
+    </LinearLayout>
+</LinearLayout>

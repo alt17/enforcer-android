@@ -1,0 +1,46 @@
+name: APK
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Компоненты SDK
+        run: sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      # Проект ищем по settings.gradle — так workflow работает и когда
+      # enforcer_android лежит в корне репозитория, и когда он подпапка.
+      - name: Сборка APK
+        run: |
+          DIR=$(dirname "$(find . -maxdepth 3 -name settings.gradle | head -1)")
+          echo "проект: $DIR"
+          cd "$DIR"
+          gradle assembleRelease --no-daemon --stacktrace
+          mkdir -p "$GITHUB_WORKSPACE/out"
+          cp app/build/outputs/apk/release/*.apk "$GITHUB_WORKSPACE/out/Enforcer.apk"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Enforcer
+          path: out/Enforcer.apk
+          if-no-files-found: error
+          # Собранный APK — тоже копия версии кода. По умолчанию он лежал бы
+          # 90 дней; здесь неделя, чтобы старые сборки не накапливались.
+          retention-days: 7

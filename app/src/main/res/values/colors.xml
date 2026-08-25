@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Синий прибора и красный пика разнесены намеренно: на графике они
+         должны различаться и в солнечный день, и на дешёвой матрице. -->
+    <color name="device">#1f77b4</color>
+    <color name="peak">#d62728</color>
+    <color name="muted">#8a8a8a</color>
+    <color name="plot_bg">#FFFFFF</color>
+    <color name="plot_grid">#DDDDDD</color>
+    <color name="plot_axis">#666666</color>
+    <color name="screen_bg">#FAFAFA</color>
+</resources>

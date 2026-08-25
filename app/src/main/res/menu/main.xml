@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Меню намеренно плоское. Вложенные подменю с checkableBehavior в overflow
+     на части прошивок не доводят нажатие до onOptionsItemSelected: пункт
+     подсвечивается, меню закрывается, а ничего не происходит. Выбор из
+     нескольких значений сделан диалогом — он ведёт себя одинаково везде,
+     и на телефоне по нему проще попасть пальцем.
+
+     Заголовки первых двух пунктов дописываются в onPrepareOptionsMenu:
+     туда подставляется текущее значение. -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/m_units" android:title="@string/menu_units" />
+    <item android:id="@+id/m_window" android:title="@string/menu_window" />
+    <item android:id="@+id/m_devices" android:title="@string/menu_devices" />
+    <item android:id="@+id/m_name" android:title="@string/menu_name" />
+    <item android:id="@+id/m_alarm" android:title="@string/menu_alarm" />
+    <item android:id="@+id/m_share" android:title="@string/menu_share" />
+    <item android:id="@+id/m_log" android:title="@string/menu_log" />
+    <!-- Разработческий отчёт. Виден только при Link.DIAG = true,
+         см. onPrepareOptionsMenu и README. -->
+    <item android:id="@+id/m_diag" android:title="@string/menu_diag"
+        android:visible="false" />
+    <item android:id="@+id/m_files" android:title="@string/menu_files" />
+    <item android:id="@+id/m_repo" android:title="@string/menu_repo" />
+</menu>

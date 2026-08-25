@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- getExternalFilesDir(null)/logs — каталог приложения, разрешений не требует
+         ни на одной версии Андроида. -->
+    <external-files-path name="logs" path="logs/" />
+</paths>
