@@ -1,3 +1,4 @@
+<img width="1080" height="2400" alt="Screenshot_2026_09_12_02_48_12_08_6ca2fa37f6ad9eac458dabd081366594" src="https://github.com/user-attachments/assets/61cff4ee-2c46-4e3a-acdb-3ed9df2f2618" />
 # Rock Exotica Enforcer для Android
 
 Запись усилия с динамометров Rock Exotica Enforcer по Bluetooth LE.
